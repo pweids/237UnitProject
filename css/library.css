@@ -1,0 +1,41 @@
+#logo {
+    font-family: 'Oswald', 'Arial', sans-serif;
+    font-size: 24px;
+    letter-spacing: .5px;
+    
+    padding:10px;
+}
+
+#sidebar {
+    width: 215px;
+    height: 100%;
+    position: fixed;
+    overflow-y: scroll;
+    margin: 0 20px;
+    font-family: 'lucida grande', arial, sans-serif;
+}
+
+#librarytag {
+    padding: 2px 25px;
+    text-align: left;
+    display: block;
+    line-height: 18px;
+    font-size: 14px;
+    color: #4b5c66;
+}
+
+.expander {
+    font-size: 10px;
+    line-height: 10px;
+    color: #B8C3C9;
+    text-transform: uppercase;
+    cursor: pointer;
+    
+    margin-bottom: 6px;
+    padding: 0px 5px;
+    display: block;
+}
+
+.browse {
+    padding: 15px 0px 18px 0px;
+}
