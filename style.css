@@ -26,21 +26,22 @@ body {
 
 #importer {
     padding-top:25px;
-    text-align: center;
+    margin-left:160px;
     font-family: 'Open Sans', Arial, sans-serif;
     color: #555;
 }
 
 #fileUploadForm input {
-    position: relative;
-    left:-25px;
+    width:80px;
     margin-top:10px;
 }
 
 #help{
-    position: relative;
-    right:155px;
-    bottom: 20px;
+    margin: 0 150px 0 auto;
+    width: 75px;
+    
+    position:relative;
+    bottom:20px;
     
     color:rgb(220, 45, 0);
     
@@ -55,8 +56,10 @@ body {
 }
 
 #instr {
-    background: #dc2d00;
+    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#c90003), color-stop(100%,#ff0000));
     color: #eee;
+    
+    border: 1px solid #999;
     
     text-align: left;
     font-family: 'Open Sans', Arial, sans-serif;
