@@ -20,7 +20,7 @@
         <ul>
             <li>Raise up iFrame</li>
             <li>Draw videos</li>
-            <h2>Click next/prev button</h2>
+            <h3>Click next/prev button</h3>
             <ul>
                 <li>Move thumbnails</li>
                 <li>Play new vid</li>
@@ -43,7 +43,7 @@
     </ul>
 </ul>
 
-<h1>Milestones</h1>
+<h2>Milestones</h2>
 <ol>
     <li>Get static UI</li>
     <li>Add dynamic elements to UI</li>
@@ -53,17 +53,17 @@
     <li>Sorting of library elements</li>
     <li>Write Youtube player/iFrame</li>
     <li>Write Controller from Library</li>
-    <li></li>
 </ol>
 
 <h1>Data Structures</h1>
-<xmp>
+<pre>
     playlist{
         "Name":Str,
         "Songs":[]
     }
-</xmp>
-<xmp>
+</pre>
+
+<pre>
     song {
         "Artist": str,
         "Title" : str,
@@ -71,21 +71,22 @@
         "Time" : num,
         "defaultVidIndex" : num
     }
-</xmp>
-<xmp>
+</pre>
+
+<pre>
     queue {
         "songs" : array,
         "shuffle" : boolean,
         "repeat" : <"no", "all", "one">
     }
-</xmp>
+</pre>
 
 <h2>Work Division</h2>
 <h3>Paul</h3>
-    <ul>
-        <li>Layout (HTML + CSS)</li>
-        
-    </ul>
+<ul>
+    <li>Layout (HTML + CSS)</li>
+
+</ul>
 <h3>Jeff</h3>
 <ul>
     <li>Work on parsing songs as a song object and into a library array</li>
