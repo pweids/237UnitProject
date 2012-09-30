@@ -12,6 +12,7 @@ body {
     font-family: 'Oswald', 'Arial', sans-serif;
     font-size:58px;
     letter-spacing: .5px;
+    padding:10px;
     
     text-align: center;
 }
@@ -84,9 +85,20 @@ body {
 
 #footer {
     position:absolute;
-    bottom:100px;
+    bottom:30px;
     width:100%;
-    background-color:red;
+    height:10px;
+   
+}
+
+#footertxt {
+    text-align:center;
+    
+    font-size: 12px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style: italic;
+    font-variant: small-caps;
+    color: #888;
 }
 
 .hidden {
