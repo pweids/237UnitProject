@@ -17,11 +17,18 @@
             </form>
         </div>    
         <div id="help">
-            <a href="">Little Help?</a>
-            <div id="instr" class="hidden">In iTunes, choose the "File" menu, go to "Library", and choose either "Export Library" or "Export Playlist." In the dialog box, choose the XML format and save it to your disk.</div>
+            <span>Little Help?</span>
         </div>
+        <div id="instr" class="hidden">In iTunes, choose the "File" menu, go to "Library", and choose either "Export Library" or "Export Playlist." In the dialog box, choose the XML format and save it to your disk.</div>
     </div>
-	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	    $("#help").click(function() {
+	        $("#instr").slideToggle();
+	    })
+    });
+	</script>
  	 <!-- <script type="text/javascript" href="parseXML.js"></script> -->
     </body>
 </html>

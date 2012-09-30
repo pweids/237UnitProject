@@ -37,10 +37,10 @@ body {
     margin-top:10px;
 }
 
-#help, #help a{
+#help{
     position: relative;
-    right:75px;
-    bottom: 10px;
+    right:155px;
+    bottom: 20px;
     
     color:rgb(220, 45, 0);
     
@@ -48,6 +48,26 @@ body {
     
     font-style: italic;
     text-align: right;
+}
+
+#help span {
+    cursor:pointer;
+}
+
+#instr {
+    background: #dc2d00;
+    color: #eee;
+    
+    text-align: left;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-style: normal;
+    font-size: 14px;
+    
+    width: 150px;
+    padding: 5px;
+    margin: 0px 150px auto auto;
+    border-radius: 3px;
+    box-shadow: 0 8px 15px -6px #333;
 }
 
 .hidden {
