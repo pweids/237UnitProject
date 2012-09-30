@@ -1,5 +1,5 @@
 function addLibrary(file) {
-    xmlhttp=new XMLHttpRequest();
+    var xmlhttp= new XMLHttpRequest();
     xmlhttp.open("GET", file,false);
     xmlhttp.send();
     libraryXML=xmlhttp.responseXML;
@@ -18,3 +18,4 @@ function addLibrary(file) {
         }
     return songs
 }
+console.log(addLibrary("Library.xml"));
