@@ -82,6 +82,13 @@ body {
     box-shadow: 0 8px 15px -6px #333;
 }
 
+#footer {
+    position:absolute;
+    bottom:100px;
+    width:100%;
+    background-color:red;
+}
+
 .hidden {
     display:none;
 }
