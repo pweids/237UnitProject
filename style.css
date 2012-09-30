@@ -1,0 +1,56 @@
+body {
+    background-color:#fdfdfd;
+}
+
+#wrapper_homepage {
+    margin: auto;
+    padding-top: 150px;
+    max-width: 600px;
+}
+
+#logo {
+    font-family: 'Oswald', 'Arial', sans-serif;
+    font-size:58px;
+    letter-spacing: .5px;
+    
+    text-align: center;
+}
+
+#tagline {
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size:22px;
+    letter-spacing: .5px;
+    
+    text-align: center;
+}
+
+#importer {
+    padding-top:25px;
+    text-align: center;
+    font-family: 'Open Sans', Arial, sans-serif;
+    color: #555;
+}
+
+#fileUploadForm input {
+    position: relative;
+    left:-25px;
+    margin-top:10px;
+}
+
+#help, #help a{
+    position: relative;
+    right:75px;
+    bottom: 10px;
+    
+    color:rgb(220, 45, 0);
+    
+    text-decoration: none;
+    
+    font-style: italic;
+    text-align: right;
+}
+
+.hidden {
+    display:none;
+}
+
