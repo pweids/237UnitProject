@@ -11,13 +11,17 @@
         <div id="logo"><span style="color:rgb(220, 45, 0)">Tube</span>Ography</div>
         <div id="sidebar">
             <div class="browse">
-                <div class="expander">Browse</div>
-                <div id="librarytag"><i class="icon-music"></i> Library</div>
+                <div class="expander lib">Browse</div>
+                <div class="lib listblock"><i class="icon-music"></i> Library</div>
             </div>
             <div class="playlists">
-                <div class="expander">Playlists</div>
-                <div class="plist">
-                    My Summer Mix
+                <div class="expander plist">Playlists</div>
+                <div class="plist listblock">
+                    <ul>
+                        <li>My Summer Mix</li>
+                        <li>Party Playlist</li>
+                        <li>Driving</li>
+                    </ul>
                 </div>
             </div>
             <div id="sidebarControls">
@@ -25,5 +29,17 @@
             </div>
         </div>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script type="text/javascript">
+    	$(document).ready(function() {
+    	    $(".expander.plist").click(function() {
+    	        console.log('clicked');
+    	        $(".plist.listblock").toggle();
+    	    })
+    	    $(".expander.lib").click(function() {
+    	        console.log('clicked');
+    	        $(".lib.listblock").toggle();
+    	    })
+        });
+    	</script>
     </body>
 </html>

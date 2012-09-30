@@ -15,15 +15,6 @@
     font-family: 'lucida grande', arial, sans-serif;
 }
 
-#librarytag {
-    padding: 2px 25px;
-    text-align: left;
-    display: block;
-    line-height: 18px;
-    font-size: 14px;
-    color: #4b5c66;
-}
-
 .expander {
     font-size: 10px;
     line-height: 10px;
@@ -38,4 +29,21 @@
 
 .browse {
     padding: 15px 0px 18px 0px;
+}
+
+.listblock {
+    padding: 2px 10px;
+    text-align: left;
+    display: block;
+    line-height: 18px;
+    font-size: 14px;
+    color: #4b5c66;
+}
+
+.plist li {
+    font-size: 12px;
+    text-decoration: none;
+    list-style: none;
+    padding: 2px 0px;
+    cursor: pointer;
 }
