@@ -1,11 +1,18 @@
 $(document).ready(function() {
+    //Data structures for songs, 
+    var songs = new Array();
+    var song = {
+        "title": "",
+        "artist": "",
+        "album": "",
+        "time" : 0; //in ms
+    }
+    
     function addLibrary(file) {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", file, false);
         xmlhttp.send();
         libraryXML = xmlhttp.responseXML;
-        var songNodes = libraryXML.getElementsByTagName('key');
-        var songs = []
         for (var i = 0; i < songNodes.length; i++) {
             if (songNodes[i].firstChild.data === "Name") {
                 var song = {
