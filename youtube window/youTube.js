@@ -27,14 +27,24 @@ $(window).load(init); //initialize upon loading of images
 function init() {
     var position = 1;
     //stores position in this list to each vid and the left position 
-    $('.vidPreview').each( function() {
+    $('.vidDiv').each( function() {
         $(this).data('vidNumber', position++);
         $(this).data('oldLeftPosition', 0);
     });
-    $('.vidPreview').click( function(){
+    $('.vidDiv').click( function(){
+        console.log('before move')
+        $('.vidDiv').each( function() {
+            console.log($(this).data('vidNumber'));
+            console.log($(this).data('oldLeftPosition'));
+            });  
         previousVideoIndex = currentVideoIndex;
-        currentSlide= $(this).data('vidNumber'); 
-        displayGallery();  
+        currentVideoIndex= $(this).data('vidNumber'); 
+        displayGallery();
+        console.log('after move')
+        $('.vidDiv').each( function() {
+            console.log($(this).data('vidNumber'));
+            console.log($(this).data('oldLeftPosition'));
+            });  
     });
     displayGallery();
         
@@ -50,7 +60,7 @@ function displayGallery() {
     var primaryVideoPadding=(windowHeight*initVariables.primaryVideoPercent)/100;
     while ( time = flipTimeouts.pop() ) clearTimeout(time);
 
-    $('.vidPreview').each( function(){
+    $('.vidDiv').each( function(){
         var thisVideo = $(this);
         if (thisVideoIndex < currentVideoIndex) {
             var leftPosition = ((galleryCenter) -
@@ -76,8 +86,8 @@ function displayGallery() {
         }
         else if (thisVideoIndex > currentVideoIndex) {
             var leftPosition = ((galleryCenter) +
+                                (thisVideoIndex*moveDistance)-
                                 (currentVideoIndex*moveDistance)-
-                                (thisVideoIndex*moveDistance)+
                                 (thisVideo.width()/2)+ 
                                 (primaryVideoPadding))
             if (thisVideoIndex < previousVideoIndex) {
@@ -103,7 +113,6 @@ function displayGallery() {
             });
             thisVideo.data('oldLeftPosition', leftPosition);
         }
-    console.log(thisVideoIndex, leftPosition)
     thisVideoIndex+=1;
     });
 }

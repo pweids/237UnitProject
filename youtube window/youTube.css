@@ -3,10 +3,10 @@
     -moz-perspective: 500px;
     /*makes the canvas appear 3 dimensional*/
     overflow: hidden;
-    height: 60%;
+    height: 100%;
     width: 100%;
     position: absolute;
-    -webkit-mask-image: -webkit-linear-gradient(left top,
+    -webkit-mask-image: -webkit-gradient(linear, left top,
                                                 right top,
                                                 color-stop(0, rgba(0,0,0,.2)),
                                                 color-stop(.1, rgba(0,0,0,1)),
@@ -16,7 +16,10 @@
     /*will not apply to mozilla browsers and no similar style exists*/
     }
 .vidPreview{ /*need to add mozilla reflection*/
-    -webkit-box-reflect: below; /*appears below image*/
+    /*appears below image*/
+    -webkit-box-reflect: 
+    below
+    0 
     -webkit-gradient(linear,
                     left top,
                     left bottom,
@@ -31,7 +34,7 @@
 .vidDiv{
     padding-bottom: 400px;
     bottom: -300px;
-    background: black;
     position: absolute;
+    background-color: white;
     /*ensures the transparent images dont overlap and that they fade out in the bottom*/
 }
