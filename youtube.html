@@ -1,47 +1,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="css/reset.css" />
-        <link rel="stylesheet" href="css/library.css" />
-        <link rel="stylesheet" href="css/font-awesome.css" />
-        <link href="css/youTube.css" rel="stylesheet" />
-
-        <title>TubeOgraphy - Library</title>
+        <link href="youTube.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="reset.css">
     </head>
     <body>
-        <div id="logo"><span style="color:rgb(220, 45, 0)">Tube</span>Ography</div>
-        <div id="topbar">
-            <ul>
-                <li>Name</li>
-                <li>Time</li>
-                <li>Artist</li>
-                <li>Album</li>
-            </ul>
-        </div>
-        <div id="sidebar">
-            <div class="browse">
-                <div class="expander lib" disabled="disabled">Browse</div>
-                <div class="lib listblock selected"><i class="icon-music"></i> Library</div>
-            </div>
-            <div class="playlists">
-                <div class="expander plist">Playlists<div id="addPlaylist">+</div></div>
-                <div class="plist listblock">
-                    <ul>
-                        
-                    </ul>
-                </div>
-            </div>
-            <div id="sidebarControls">
-                
-            </div>
-        </div>
-        
-        <div id="songlist">
-            <table>
-            </table>
-            
-        </div>
+        <form name="myform" action="javaScript:getSong()">
+            <input id="song" name="Text" type="text" placeholder="Song">
+            <input id="artist" name="Text" type="text" placeholder="Artist">
+            <input id="album" name="Text" type="text" placeholder="Album">
+            <input id="Submit"  type="submit" value="Get Song"/>
+        </form>
+
         <div id="videoGallery">
             <div id="video0" class="vidDiv"><div class="vidPreview"></div></div>
             <div id="video1" class="vidDiv"><div class="vidPreview"></div></div>
@@ -71,9 +41,9 @@
             <div id="video25" class="vidDiv"><div class="vidPreview"></div></div>
 
         </div>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-        <script type="txt/javascript" src="youTube.js"></script>
-        <script type="text/javascript" src="library.js"></script>
-        <script src="jquery.swfobject.1-1-1.min.js" type ="text/javaScript"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script type="text/javascript" src="http://swfobject.googlecode.com/svn/trunk/swfobject/swfobject.js"></script>
+    <script stlye="txt/javascript" src="youTube.js"></script>
+    <script src="jquery.swfobject.1-1-1.min.js" type ="text/javaScript"></script>
     </body>
 </html>
