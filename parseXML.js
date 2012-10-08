@@ -17,14 +17,38 @@ $(document).ready(function() {
 
                 songs.push(newSong);
             });
+            console.log(songs);
+            sessionStorage.clear();
+            sessionStorage.setItem('library', JSON.stringify(songs));
+            window.location.replace('library.html');
         }
-
-
+        
+    $('#fileInput').on('change', function(e) {
+        var file = this.files[0];
+        if (file !== null){
+            var fr = new FileReader();
+            fr.onloadend = function(evt) {
+                  if (evt.target.readyState == FileReader.DONE) {
+                    libParser(evt.target.result);
+                  }
+                };
+            fr.onerror = function (evt) {
+                console.log(evt.target.error);
+            }
+            fr.readAsText(file);
+        }
+        else alert("Document error. Of type " + file.type)
+    });
+        
+    /*
+    PLEASE NOTE == THE BELOW IS FOR TESTING IN CHROME ONLY
+    FileReader WILL NOT RUN WITH LOCAL FILES IN CHROME
+    
     var libraryXML = $.get('Library.xml', libParser, 'xml');
     libraryXML.complete(function() {
         sessionStorage.clear();
         sessionStorage.setItem("library", JSON.stringify(songs));
         window.location.replace('library.html');
     });
-
+*/
 });
