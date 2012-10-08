@@ -6,13 +6,13 @@ body{
     -moz-perspective: 500px;
     /*makes the canvas appear 3 dimensional*/
     overflow: hidden;
-    height: 100%;
+    height: 30%;
     width: 100%;
     position: absolute;
+    bottom: 0;
 
     }
-.vidPreview{ /*need to add mozilla reflection*/
-    /*appears below image*/
+.vidPreview{ 
     -webkit-box-reflect: 
     below
     0 
