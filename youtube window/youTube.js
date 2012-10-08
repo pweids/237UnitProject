@@ -1,89 +1,162 @@
 
-
-var videos = ["AlbumArt/img1.jpg", "AlbumArt/img2.jpg", "AlbumArt/img3.jpg", "AlbumArt/img4.jpg", "AlbumArt/img5.jpg", "AlbumArt/img6.jpg", "AlbumArt/img7.jpg"];
-    $('#video0').prepend('<img src=' + videos[0] + ' class= "vidPreview"/>');
-    $('#video1').prepend('<img src=' + videos[1] + ' class= "vidPreview"/>');
-    $('#video2').prepend('<img src=' + videos[2] + ' class= "vidPreview"/>');
-    $('#video3').prepend('<img src=' + videos[3] + ' class= "vidPreview"/>');
-    $('#video4').prepend('<img src=' + videos[4] + ' class= "vidPreview"/>');
-    $('#video5').prepend('<img src=' + videos[5] + ' class= "vidPreview"/>');
-    $('#video6').prepend('<img src=' + videos[6] + ' class= "vidPreview"/>');
-
-    $('#leftButton').click(function() {
-    });
+//------------------initialization----------------
+window.onload=init;
 
 var initVariables = {
     "rotationAngle":65, //degrees
-    "bgVideoPercent": 15, //percent should be calculated by window size!!
-    "primaryVideoPercent":70 //percent
+    "bgVideoPercent": 25, //percent should be calculated by window size!!
+    "primaryVideoPercent":60 //percent
 }
-//dynamic variables
-var currentVideoIndex = 4;
-var previousVideoIndex = currentVideoIndex;
-var flipTimeouts = [];
-$(window).load(init); //initialize upon loading of images
-
 
 function init() {
+    resetAll();
+    $('.vidDiv').click( function(){
+        console.log(videoPlaying);
+        if ($(this).data('vidNumber') != currentVideoIndex){
+            if (videoPlaying) {
+                $('#player').remove();
+                window.videoPlaying = false
+            }
+                else {
+                    previousVideoIndex = currentVideoIndex;
+                    currentVideoIndex= $(this).data('vidNumber'); 
+                    displayGallery();
+                    }
+        }
+        else {
+            playVideo();
+        }
+    });
+        
+}
+function resetAll(){
+    window.currentVideoIndex = 1;
+    window.previousVideoIndex = currentVideoIndex;
+    window.flipTimeouts = [];
+    window.videoPlaying = false;
     var position = 1;
+    $('.vidPreview').remove();
     //stores position in this list to each vid and the left position 
     $('.vidDiv').each( function() {
         $(this).data('vidNumber', position++);
         $(this).data('oldLeftPosition', 0);
     });
-    $('.vidDiv').click( function(){
-        console.log('before move')
-        $('.vidDiv').each( function() {
-            console.log($(this).data('vidNumber'));
-            console.log($(this).data('oldLeftPosition'));
-            });  
-        previousVideoIndex = currentVideoIndex;
-        currentVideoIndex= $(this).data('vidNumber'); 
-        displayGallery();
-        console.log('after move')
-        $('.vidDiv').each( function() {
-            console.log($(this).data('vidNumber'));
-            console.log($(this).data('oldLeftPosition'));
-            });  
-    });
-    displayGallery();
-        
 }
 
+
+
+//----------------manipulating of video objects--------------
+function getSong() {
+    resetAll();
+    var song = document.getElementById('song').value.match(/\w+|"[^"]+"/g);
+    var album = document.getElementById('album').value.match(/\w+|"[^"]+"/g);
+    var artist = document.getElementById('artist').value.match(/\w+|"[^"]+"/g);
+    var searchString = ""
+    for (var i = 0; i<song.length; i++){
+        searchString = searchString + song[i]+ "%20"
+    }
+    searchString = searchString.substring(0, searchString.length - 3);
+        $.ajax({
+            type: "GET",
+            url: "https://gdata.youtube.com/feeds/api/videos/-/%7Bhttp%3A%2F%2Fgdata.youtube.com%2Fschemas%2F2007%2Fcategories.cat%7DMusic?alt=json&q=" + searchString+ "&orderby=viewCount&format=5",
+            dataType: "jsonp",
+            success: function(data) {
+                    var feed = data.feed;
+                    window.entries = feed.entry || [];
+                    processVideos(entries);
+            }
+        });
+    }
+
+function processVideos(entries) {
+  for (var i = 0; i< entries.length; i++) {
+    var thumbnailUrl = entries[i].media$group.media$thumbnail[0].url
+    $('#video'+i).prepend('<img src=' + thumbnailUrl + ' class= "vidPreview"/>');
+    }
+    displayGallery();
+
+}
+
+
+function playVideo(){
+        window.videoPlaying = true;
+        var playerUrl = entries[currentVideoIndex-1].media$group.media$content[0].url;
+        var autoplay = true;
+        var obj = document.createElement('object');
+        obj.setAttribute('id','player');
+        //find the current video to append to
+        $('.vidDiv').each( function(){
+            if ($(this).data('vidNumber') === currentVideoIndex){
+                $(this).prepend(obj)
+            }
+        });   
+        $('#player').each(function() {
+        swfobject.embedSWF(
+          playerUrl + '&rel=1&border=0&fs=1&autoplay=' + 
+          (autoplay?1:0)+ "?enablejsapi=1", 'player', '290', '250', '9.0.0', false, 
+          false, {allowfullscreen: 'true'});
+        //add css to object
+        $('#player').bind('onStateChange', 'playerState');
+        swfobject.createCSS("#player", "width:100%; height:50%;");            
+        });
+ 
+    }
+function playerState(){
+    console.log("this happens");
+    /*YT.PlayerState.ENDED
+YT.PlayerState.PLAYING
+YT.PlayerState.PAUSED
+YT.PlayerState.BUFFERING
+YT.PlayerState.CUED*/
+}
+function pause(){
+
+}
+//--------------------displaying and manipulating gallery----------------
 function displayGallery() {
-    var thisVideoIndex = 1
+    var thisVideoIndex = 1;
+    var leftz = 1;
+    var rightz = 24;
+    var currentz = 25;
     var galleryWidth = $('#videoGallery').width();
     var galleryCenter =galleryWidth/2;
-    var windowHeight = $(window).height();
     //the number of pixels a background preview will move when prompted
-    var moveDistance = (windowHeight*initVariables.bgVideoPercent)/100; 
-    var primaryVideoPadding=(windowHeight*initVariables.primaryVideoPercent)/100;
+    var moveDistance = ($(window).height()*initVariables.bgVideoPercent)/100; 
+    //determines padding so video fits on screen
+    var primaryVideoPadding=($(window).height()*initVariables.primaryVideoPercent)/100;
     while ( time = flipTimeouts.pop() ) clearTimeout(time);
 
     $('.vidDiv').each( function(){
         var thisVideo = $(this);
         if (thisVideoIndex < currentVideoIndex) {
             var leftPosition = ((galleryCenter) -
-                                (currentVideoIndex*moveDistance)+
-                                (thisVideoIndex*moveDistance)-
-                                (thisVideo.width()/2)- 
-                                (primaryVideoPadding))
+                                (currentVideoIndex*moveDistance)+ //moved to center of left most div
+                                (thisVideoIndex*moveDistance)- //moved to center of current div
+                                (thisVideo.width()/2)- //moved to left of current div
+                                (primaryVideoPadding)) //added padding for primary div
+            //begin rotation of div if needed
             if (thisVideoIndex > previousVideoIndex) {
                 thisVideo.css( {
-                  '-webkit-transition': 'none',
-                  '-webkit-transform': 'translate3d(' + thisVideo.data('oldLeftPosition') + 'px,0,-' + (100+parseInt(thisVideo.width()/1.5)) + 'px) rotateY(-' + initVariables.rotationAngle + 'deg)'
+                  '-webkit-transform': 'translate3d(' + thisVideo.data('oldLeftPosition') + 'px,0,-' + (100+parseInt(thisVideo.width()/1.5)) + 'px) rotateY(-' + initVariables.rotationAngle + 'deg)',
+                  '-moz-transform': 'translate3d(' + thisVideo.data('oldLeftPosition') + 'px,0,-' + (100+parseInt(thisVideo.width()/1.5)) + 'px) rotateY(-' + initVariables.rotationAngle + 'deg)'
                         });
             }
+            //wait the 10ms then begin moving
             var timeOut = setTimeout( function() {
                 thisVideo.css( {
-                  '-webkit-transition': '-webkit-transform .8s cubic-bezier(0, 0, .001, 1)',
-                  '-webkit-transform': 'translate3d(' + leftPosition + 'px,0,-' + (100+parseInt(thisVideo.width()/1.5)) + 'px) rotateY(' + initVariables.rotationAngle + 'deg)'
+                    '-webkit-transition': '-webkit-transform .8s cubic-bezier(.1, .1, .001, 1)',
+                    '-webkit-transform': 'translate3d(' + leftPosition + 'px,0,-' + (100+parseInt(thisVideo.width()/1.5)) + 'px) rotateY(' + initVariables.rotationAngle + 'deg)',
+                    '-moz-transition': '-moz-transform .8s cubic-bezier(0, 0, .001, 1)',
+                    '-transform': 'translate3d(' + leftPosition + 'px,0,-' + (100+parseInt(thisVideo.width()/1.5)) + 'px) rotateY(' + initVariables.rotationAngle + 'deg)'
                 });
             }, 10 );
             flipTimeouts.push(timeOut);
             thisVideo.data('oldLeftPosition', leftPosition);
-
+            thisVideo.css( {
+                'z-index':  leftz});
+            leftz += 1;
         }
+        //determine rotation/location if video is on right
         else if (thisVideoIndex > currentVideoIndex) {
             var leftPosition = ((galleryCenter) +
                                 (thisVideoIndex*moveDistance)-
@@ -92,29 +165,37 @@ function displayGallery() {
                                 (primaryVideoPadding))
             if (thisVideoIndex < previousVideoIndex) {
                 thisVideo.css( {
-                  '-webkit-transition': 'none',
-                  '-webkit-transform': 'translate3d(' + thisVideo.data('oldLeftPosition') + 'px,0,-' + (100+parseInt(thisVideo.width()/1.5)) + 'px) rotateY(-' + initVariables.rotationAngle + 'deg)'
+                  '-webkit-transform': 'translate3d(' + thisVideo.data('oldLeftPosition') + 'px,0,-' + (100+parseInt(thisVideo.width()/1.5)) + 'px) rotateY(-' + initVariables.rotationAngle + 'deg)',
+                  '-moz-transform': 'translate3d(' + thisVideo.data('oldLeftPosition') + 'px,0,-' + (100+parseInt(thisVideo.width()/1.5)) + 'px) rotateY(-' + initVariables.rotationAngle + 'deg)'
                         });
             }
             var timeOut = setTimeout( function() {
                 thisVideo.css( {
-                  '-webkit-transition': '-webkit-transform .8s cubic-bezier(0, 0, .001, 1)',
-                  '-webkit-transform': 'translate3d(' + leftPosition + 'px,0,-' + (100+parseInt(thisVideo.width()/1.5)) + 'px) rotateY(-' + initVariables.rotationAngle + 'deg)'
+                    '-webkit-transition': '-webkit-transform .8s cubic-bezier(.1, .1, .001, 1)',
+                    '-webkit-transform': 'translate3d(' + leftPosition + 'px,0,-' + (100+parseInt(thisVideo.width()/1.5)) + 'px) rotateY(-' + initVariables.rotationAngle + 'deg)',
+                    '--moz-transition': '-moz-transform .8s cubic-bezier(0, 0, .001, 1)',
+                    '-transform': 'translate3d(' + leftPosition + 'px,0,-' + (100+parseInt(thisVideo.width()/1.5)) + 'px) rotateY(-' + initVariables.rotationAngle + 'deg)'
                 });
             }, 10 );
             flipTimeouts.push(timeOut);
-            thisVideo.data('oldLeftPosition', leftPosition);            
+            thisVideo.data('oldLeftPosition', leftPosition);
+            thisVideo.css( {
+                    'z-index':  rightz});
+            rightz-= 1 
 
         }
         else {
             var leftPosition = galleryCenter-(thisVideo.width()/2);
             thisVideo.css( {
-                '-webkit-transform': 'translate3d(' + leftPosition + 'px,0,0) rotateY(0deg)'
+                'z-index': currentz,
+                '-webkit-transform': 'translate3d(' + leftPosition + 'px,0,0) rotateY(0deg)',
+                '-moz-transform': 'translate3d(' + leftPosition + 'px,0,0) rotateY(0deg)'
+
             });
             thisVideo.data('oldLeftPosition', leftPosition);
         }
     thisVideoIndex+=1;
     });
-}
 
+}
 
