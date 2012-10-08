@@ -6,26 +6,25 @@ $(document).ready(function() {
 
             var songNodes = $(xml).find("dict>dict>dict");
             songNodes.each(function(index) {
-                var newSong = {
-                    id: index
-                };
+                var newSong = {};
 
-                newSong.name = $(':nth-child(4)', $(this)).text();
-                newSong.artist = $(':nth-child(6)', $(this)).text();
-                newSong.album = $(':nth-child(10)', $(this)).text();
-                newSong.time = $(':nth-child(18)', $(this)).text();;
+
+                newSong.id = $('key:contains("Track ID")', $(this)).next().text();
+                newSong.name = $('key:contains("Name")', $(this)).next().text();
+                newSong.artist = $('key:contains("Artist")', $(this)).next().text();
+                newSong.album = $('key:contains("Album")', $(this)).next().text();
+                newSong.time = $('key:contains("Total Time")', $(this)).next().text();
 
                 songs.push(newSong);
-
-            })
+            });
         }
 
 
     var libraryXML = $.get('Library.xml', libParser, 'xml');
-    libraryXML.complete(function(){
-        console.log(JSON.stringify(songs));
+    libraryXML.complete(function() {
+        sessionStorage.clear();
         sessionStorage.setItem("library", JSON.stringify(songs));
-        //window.location.replace('library.html'); 
+        window.location.replace('library.html');
     });
 
 });

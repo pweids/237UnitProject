@@ -1,7 +1,15 @@
 $(document).ready(function() {
     
-    
 //Helper Functions
+
+    //This makes the top bar width flexible and more accurate
+    function setSizes() {
+       var rightWidth = Math.max($('body').width()-216, 400);
+       $("#topbar").width(rightWidth);
+       $('#songlist').width(rightWidth);
+       $('#songlist > table').width(rightWidth);
+    }
+    
     
     //This clears the selection on the window to avoid double-click selection when interacting with elems
     function clearSelection() {
@@ -13,9 +21,34 @@ $(document).ready(function() {
         }
     }
     
+    function getReadableTime(songtime) {
+        x = songtime / 1000;
+        seconds = Math.round(x % 60);
+        x /= 60;
+        minutes = Math.round(x % 60);
+        
+        return minutes + ((seconds<10) ? ":0" : ":") + seconds ;
+    }
     
+//Main Functionality
+    setSizes();
+    var songs = JSON.parse(sessionStorage.getItem("library"));
+    if (!songs) {
+        alert("Error! Bad Session Storage");
+    }
+    else {
+        $.each(songs, function(key, value) {
+            $('#songlist table').append('<tr><td>' + value.name + 
+            '</td><td>' + getReadableTime(value.time) + '</td><td>' + value.artist + 
+            '</td><td>' + value.album + '</td></tr>');
+        });
+    }
+        
+
     
-//Click Event Handlers
+//Event Handlers
+
+    $(window).resize(function() { setSizes(); });
     
     // When the "Playlist" button is hit it shows the listblock
     $(".expander.plist").click(function() {
@@ -42,4 +75,9 @@ $(document).ready(function() {
         $(this).addClass('selected');
     });
     
+    $('#addPlaylist').click(function() {
+        var plistname = prompt("Insert name for new playlist");
+        $('.plist.listblock ul').append('<li>'+plistname+'</li>');
+        $(".plist.listblock").toggle();
+    });
 });

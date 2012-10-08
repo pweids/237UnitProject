@@ -14,7 +14,7 @@
     height: 100%;
     padding-top: 9px;
     padding-bottom: 2px;
-    margin-left: 10px;
+    margin-left: 5px;
     display: inline-block;
     border-right:1px solid gray;
     font-family: 'lucida grande', arial, sans-serif;
@@ -40,7 +40,7 @@
     font-size: 24px;
     letter-spacing: .5px;
     
-    position: absolute;
+    position: fixed;
     padding:10px;
 }
 
@@ -56,6 +56,46 @@
     border-right:1px solid gray;
 }
 
+#addPlaylist {
+    float:right;
+    width:15px;
+}
+
+#songlist {
+    position: relative;
+    left: 216px;
+    top: 30px;
+}
+
+#songlist table {
+    table-layout:fixed;
+    overflow:hidden;
+}
+
+#songlist td {
+    overflow:hidden;
+    text-overflow:ellipsis;
+    height:20px;
+    padding-top:3px;
+}
+
+#songlist tr:nth-child(even) {
+    background-color: rgb(243, 246, 250);
+}
+
+#songlist td:nth-child(1){
+    padding-left:4px;
+    width: 26%;
+}
+#songlist td:nth-child(2){
+    width: 10%;
+}
+#songlist td:nth-child(3){
+    width: 17%;
+}
+#songlist td:nth-child(4){
+    width: 30%;
+}
 .expander {
     font-size: 10px;
     line-height: 10px;
