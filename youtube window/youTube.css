@@ -1,3 +1,6 @@
+body{
+    background-color: white;
+}
 #videoGallery{
     -webkit-perspective: 500px;
     -moz-perspective: 500px;
@@ -6,14 +9,7 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    -webkit-mask-image: -webkit-gradient(linear, left top,
-                                                right top,
-                                                color-stop(0, rgba(0,0,0,.2)),
-                                                color-stop(.1, rgba(0,0,0,1)),
-                                                color-stop(.9, rgba(0,0,0,1)),
-                                                color-stop(1, rgba(0,0,0,.2)));
-    /*above statement fades in the edges of the cover flow with alpha transparency*/
-    /*will not apply to mozilla browsers and no similar style exists*/
+
     }
 .vidPreview{ /*need to add mozilla reflection*/
     /*appears below image*/
@@ -26,9 +22,10 @@
                     color-stop(0, rgba(255,255,255,0)),
                     color-stop(.5, rgba(255,255,255,.4)),
                     color-stop(1, rgba(255,255,255,.8)));
-    max-width: inherit;
-    max-height: inherit;
+
     display: inline;
+    width: 480px;
+    height: 360px;
     }
 
 .vidDiv{
@@ -38,3 +35,12 @@
     background-color: white;
     /*ensures the transparent images dont overlap and that they fade out in the bottom*/
 }
+#player{
+    position: absolute;
+    z-index: 2;
+
+}
+
+
+
+
