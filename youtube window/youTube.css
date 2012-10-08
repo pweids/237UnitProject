@@ -35,7 +35,7 @@ body{
     background-color: white;
     /*ensures the transparent images dont overlap and that they fade out in the bottom*/
 }
-#player{
+#ytPlayer{
     position: absolute;
     z-index: 2;
 
