@@ -1,22 +1,31 @@
 $(document).ready(function() {
-    function addLibrary(file) {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", file, false);
-        xmlhttp.send();
-        libraryXML = xmlhttp.responseXML;
-        var songNodes = libraryXML.getElementsByTagName('key');
-        var songs = []
-        for (var i = 0; i < songNodes.length; i++) {
-            if (songNodes[i].firstChild.data === "Name") {
-                var song = {
-                    "Song": songNodes[i].nextSibling,
-                    "Artist": songNodes[i + 1].nextSibling,
-                    "Album": songNodes[i + 3].nextSibling,
-                    "Time": songNodes[i + 7].nextSibling,
-                }
-            }
-            songs.push(song);
+
+    var songs = [];
+
+    var libParser = function(xml) {
+
+            var songNodes = $(xml).find("dict>dict>dict");
+            songNodes.each(function(index) {
+                var newSong = {
+                    id: index
+                };
+
+                newSong.name = $(':nth-child(4)', $(this)).text();
+                newSong.artist = $(':nth-child(6)', $(this)).text();
+                newSong.album = $(':nth-child(10)', $(this)).text();
+                newSong.time = $(':nth-child(18)', $(this)).text();;
+
+                songs.push(newSong);
+
+            })
         }
-        return songs
-    }
+
+
+    var libraryXML = $.get('Library.xml', libParser, 'xml');
+    libraryXML.complete(function(){
+        console.log(JSON.stringify(songs));
+        sessionStorage.setItem("library", JSON.stringify(songs));
+        //window.location.replace('library.html'); 
+    });
+
 });
