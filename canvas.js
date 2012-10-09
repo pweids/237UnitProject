@@ -35,7 +35,7 @@ function drawTiles(){
         }
     }
     playButton = new Image();
-    playButton.src = 'youtube-play.jpg';
+    playButton.src = 'Images/youtube-play.jpg';
     ctx.drawImage(playButton, 0, 0);
     ctx.restore();
 }
@@ -48,6 +48,8 @@ $("#myCanvas").click(function boom() {
     }
     else{
         ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        $('#myCanvas').remove()
+        $("body").css("overflow", "visible");
     }
 });
 init();
