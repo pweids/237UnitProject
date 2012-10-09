@@ -126,6 +126,10 @@ $(document).ready(function() {
 
     $('#playit').click(function() {
         var searchString = currentSong.name + currentSong.artist;
+            if (window.videoPlaying) {
+                $('#player').remove();
+                window.videoPlaying = false
+            }
         getSong(searchString);
     })
 });

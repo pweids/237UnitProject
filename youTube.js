@@ -11,7 +11,6 @@ var initVariables = {
 function init() {
     resetAll();
     $('.vidDiv').click( function(){
-        console.log(videoPlaying);
         if ($(this).data('vidNumber') != currentVideoIndex){
             if (videoPlaying) {
                 $('#player').remove();
@@ -94,22 +93,11 @@ function playVideo(){
           (autoplay?1:0)+ "?enablejsapi=1", 'player', '290', '250', '9.0.0', false, 
           false, {allowfullscreen: 'true'}, {id: 'player'});
         //add css to object
-        $('#player').bind('onStateChange', 'playerState');
         swfobject.createCSS("#player", "width:100%; height:90%;");            
         });
  
     }
-function playerState(){
-    console.log("this happens");
-    /*YT.PlayerState.ENDED
-YT.PlayerState.PLAYING
-YT.PlayerState.PAUSED
-YT.PlayerState.BUFFERING
-YT.PlayerState.CUED*/
-}
-function pause(){
 
-}
 //--------------------displaying and manipulating gallery----------------
 function displayGallery() {
     var thisVideoIndex = 1;
@@ -145,7 +133,7 @@ function displayGallery() {
                     '-webkit-transition': '-webkit-transform .8s cubic-bezier(.1, .1, .001, 1)',
                     '-webkit-transform': 'translate3d(' + leftPosition + 'px,0,-' + (100+parseInt(thisVideo.width()/1.5)) + 'px) rotateY(' + initVariables.rotationAngle + 'deg)',
                     '-moz-transition': '-moz-transform .8s cubic-bezier(0, 0, .001, 1)',
-                    '-transform': 'translate3d(' + leftPosition + 'px,0,-' + (100+parseInt(thisVideo.width()/1.5)) + 'px) rotateY(' + initVariables.rotationAngle + 'deg)'
+                    '-moz-transform': 'translate3d(' + leftPosition + 'px,0,-' + (100+parseInt(thisVideo.width()/1.5)) + 'px) rotateY(' + initVariables.rotationAngle + 'deg)'
                 });
             }, 10 );
             flipTimeouts.push(timeOut);
@@ -172,7 +160,7 @@ function displayGallery() {
                     '-webkit-transition': '-webkit-transform .8s cubic-bezier(.1, .1, .001, 1)',
                     '-webkit-transform': 'translate3d(' + leftPosition + 'px,0,-' + (100+parseInt(thisVideo.width()/1.5)) + 'px) rotateY(-' + initVariables.rotationAngle + 'deg)',
                     '--moz-transition': '-moz-transform .8s cubic-bezier(0, 0, .001, 1)',
-                    '-transform': 'translate3d(' + leftPosition + 'px,0,-' + (100+parseInt(thisVideo.width()/1.5)) + 'px) rotateY(-' + initVariables.rotationAngle + 'deg)'
+                    '-moz-transform': 'translate3d(' + leftPosition + 'px,0,-' + (100+parseInt(thisVideo.width()/1.5)) + 'px) rotateY(-' + initVariables.rotationAngle + 'deg)'
                 });
             }, 10 );
             flipTimeouts.push(timeOut);
