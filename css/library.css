@@ -61,39 +61,63 @@
     width:15px;
 }
 
-#songlist {
+#addBox {
+    background: #c90003;
+    
+    color: #eee;
+    
+    border: 1px solid #999;
+    
+    text-align: left;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-style: normal;
+    font-size: 14px;
+    
+    width: 200px;
+    padding: 5px;
+    margin: 0px 150px auto auto;
+    border-radius: 3px;
+    box-shadow: 0 8px 15px -6px #333;
+    
+    position:absolute;
+    
+    display:none;
+}
+
+.songlist {
     position: relative;
     left: 216px;
     top: 30px;
 }
 
-#songlist table {
+.songlist table {
     table-layout:fixed;
     overflow:hidden;
 }
 
-#songlist td {
+.songlist td {
     overflow:hidden;
     text-overflow:ellipsis;
     height:20px;
     padding-top:3px;
+    cursor:pointer;
 }
 
-#songlist tr:nth-child(even) {
+.songlist tr:nth-child(even) {
     background-color: rgb(243, 246, 250);
 }
 
-#songlist td:nth-child(1){
+.songlist td:nth-child(1){
     padding-left:4px;
     width: 26%;
 }
-#songlist td:nth-child(2){
+.songlist td:nth-child(2){
     width: 10%;
 }
-#songlist td:nth-child(3){
+.songlist td:nth-child(3){
     width: 17%;
 }
-#songlist td:nth-child(4){
+.songlist td:nth-child(4){
     width: 30%;
 }
 .expander {

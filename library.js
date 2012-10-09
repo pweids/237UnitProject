@@ -6,8 +6,8 @@ $(document).ready(function() {
     function setSizes() {
        var rightWidth = Math.max($('body').width()-216, 400);
        $("#topbar").width(rightWidth);
-       $('#songlist').width(rightWidth);
-       $('#songlist > table').width(rightWidth);
+       $('.songlist').width(rightWidth);
+       $('.songlist > table').width(rightWidth);
     }
     
     
@@ -38,7 +38,7 @@ $(document).ready(function() {
     }
     else {
         $.each(songs, function(key, value) {
-            $('#songlist table').append('<tr><td>' + value.name + 
+            $('.songlist table').append('<tr><td>' + value.name + 
             '</td><td>' + getReadableTime(value.time) + '</td><td>' + value.artist + 
             '</td><td>' + value.album + '</td></tr>');
         });
@@ -63,21 +63,35 @@ $(document).ready(function() {
     });
     
     //When a playlist is selected
-    $(".plist li").click(function() {
-        $(this).parent().find('li').removeClass('selected');
-        $('.lib').removeClass('selected');
-        $(this).addClass('selected');
-    });
+    
     
     //when the library is selected
     $(".lib.listblock").click(function() {
         $('.plist ul').find('li').removeClass('selected');
         $(this).addClass('selected');
+        $('.songlist').css('color', 'black');
     });
     
     $('#addPlaylist').click(function() {
         var plistname = prompt("Insert name for new playlist");
         $('.plist.listblock ul').append('<li>'+plistname+'</li>');
+        $('#addBoxSelections').append('<option>' + plistname + '</option>');
         $(".plist.listblock").toggle();
+        $(".plist li").click(function() {
+            $(this).parent().find('li').removeClass('selected');
+            $('.lib').removeClass('selected');
+            $(this).addClass('selected');
+            $('.songlist').css('color', '#666');
+        });
     });
+    
+    $(".songlist tr").click(function(e) {
+        var name = $(this).children(':nth-child(1)').text();
+        var artist = $(this).children(':nth-child(3)').text();
+        $("#addBox").css('left', e.pageX-216).css('top', e.pageY-10).show();
+    });
+    
+    $("#addBoxSelectors").mouseleave( function() {
+        $(this).fadeOut();
+    })
 });
