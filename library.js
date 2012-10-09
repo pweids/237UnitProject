@@ -1,3 +1,8 @@
+/* library.js
+    Active on library.html
+    Created by Paul Weidinger and Jeff Mich
+*/
+
 $(document).ready(function() {
     var currentSong = {
         name: null,
@@ -5,10 +10,9 @@ $(document).ready(function() {
     };
     var currentTR;
     var playlists = [];
-    //Helper Functions
+    
+//Helper Functions
     //This makes the top bar width flexible and more accurate
-
-
     function setSizes() {
         var rightWidth = Math.max($('body').width() - 216, 400);
         $("#topbar").width(rightWidth);
@@ -18,8 +22,6 @@ $(document).ready(function() {
 
 
     //This clears the selection on the window to avoid double-click selection when interacting with elems
-
-
     function clearSelection() {
         if (document.selection && document.selection.empty) {
             document.selection.empty();
@@ -28,33 +30,27 @@ $(document).ready(function() {
             sel.removeAllRanges();
         }
     }
-
-    function getReadableTime(songtime) {
-        x = songtime / 1000;
-        seconds = Math.round(x % 60);
+    
+    //This converts milliseconds to mins/secs
+    function betterTime(songtime) {
+        var x = songtime / 1000;
+        var seconds = Math.round(x % 60);
         x /= 60;
-        minutes = Math.round(x % 60);
+        var minutes = Math.round(x % 60);
 
         return minutes + ((seconds < 10) ? ":0" : ":") + seconds;
     }
 
     //Main Functionality
     setSizes();
-/*
-    if (!localStorage.getItem('playlists')) {
-        localStorage.setItem('playlists', JSON.stingify(playlists));
-    }
-    else {
-        playlists = JSON.parse(sessionStorage.getItem("playlists"));
-    }
-    */
 
+    //Parse the JSON in sessionStorage and add to library
     var songs = JSON.parse(sessionStorage.getItem("library"));
     if (!songs) {
         alert("Error! Bad Session Storage");
     } else {
         $.each(songs, function(key, value) {
-            $('.songlist table').append('<tr><td>' + value.name + '</td><td>' + getReadableTime(value.time) + '</td><td>' + value.artist + '</td><td>' + value.album + '</td></tr>');
+            $('.songlist table').append('<tr><td>' + value.name + '</td><td>' + betterTime(value.time) + '</td><td>' + value.artist + '</td><td>' + value.album + '</td></tr>');
         });
     }
 
@@ -85,6 +81,7 @@ $(document).ready(function() {
         $('.songlist tr').show();
     });
 
+    //When a user creates a new playlist, we create it, add to the list of playlists, and assign it event handlers
     $('#addPlaylist').click(function() {
         var plistname = prompt("Insert name for new playlist");
         if (plistname) {
@@ -104,6 +101,7 @@ $(document).ready(function() {
         }
     });
 
+    //Bring up the box that adds to playlists and plays the song
     $(".songlist tr").click(function(e) {
         var name = $(this).children(':nth-child(1)').text();
         var artist = $(this).children(':nth-child(3)').text();
@@ -113,17 +111,20 @@ $(document).ready(function() {
         currentTR = $(this);
     });
 
+    //Fades the addbox away when the mouse cursor moves out of the div
     $("#addBox").mouseleave(function() {
         if (!$('#addBoxSelections').is(':focus')) $(this).fadeOut()
         $('.songlist .selected').removeClass('selected');
     })
 
+    //Handles add-to-playlist selector
     $('#addBoxSelections').change(function() {
         selectedplist = $((':selected'), $(this)).text();
         currentTR.addClass('playlist-' + selectedplist);
         $(this).blur();
     })
 
+    //handles play button
     $('#playit').click(function() {
         var searchString = currentSong.name + currentSong.artist;
             if (window.videoPlaying) {
