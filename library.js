@@ -112,6 +112,7 @@ $(document).ready(function() {
     })
     
     $('#playit').click( function() {
-        alert("Jeff do it!");
+        var searchString = currentSong.name + currentSong.artist;
+        getSong(searchString);
     })
 });

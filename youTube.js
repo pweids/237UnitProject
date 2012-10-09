@@ -46,26 +46,21 @@ function resetAll(){
 
 
 //----------------manipulating of video objects--------------
-function getSong() {
-    console.log("this happens");
+function getSong(searchString) {
     resetAll();
-//    var song = document.getElementById('song').value.match(/\w+|"[^"]+"/g);
-//    var album = document.getElementById('album').value.match(/\w+|"[^"]+"/g);
-//    var artist = document.getElementById('artist').value.match(/\w+|"[^"]+"/g);
-    var song = "call me maybe"
-    var searchString = ""
+    var song = searchString.match(/\w+|"[^"]+"/g);
+    var searchQuery = ""
     for (var i = 0; i<song.length; i++){
-        searchString = searchString + song[i]+ "%20"
+        searchQuery = searchQuery + song[i]+ "%20"
     }
-    searchString = searchString.substring(0, searchString.length - 3);
+    searchQuery = searchQuery.substring(0, searchQuery.length - 3);
         $.ajax({
             type: "GET",
-            url: "https://gdata.youtube.com/feeds/api/videos/-/%7Bhttp%3A%2F%2Fgdata.youtube.com%2Fschemas%2F2007%2Fcategories.cat%7DMusic?alt=json&q=" + searchString+ "&orderby=viewCount&format=5",
+            url: "https://gdata.youtube.com/feeds/api/videos/-/%7Bhttp%3A%2F%2Fgdata.youtube.com%2Fschemas%2F2007%2Fcategories.cat%7DMusic?alt=json&q=" + searchQuery+ "&orderby=viewCount&format=5",
             dataType: "jsonp",
             success: function(data) {
                     var feed = data.feed;
                     window.entries = feed.entry || [];
-                    console.log(entries);
                     processVideos(entries);
             }
         });
