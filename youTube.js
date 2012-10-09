@@ -202,4 +202,3 @@ function displayGallery() {
 
 }
 
-getSong();

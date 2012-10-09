@@ -6,7 +6,7 @@ body{
     -moz-perspective: 500px;
     /*makes the canvas appear 3 dimensional*/
     overflow: hidden;
-    height: 30%;
+    height: 40%;
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -29,8 +29,8 @@ body{
     }
 
 .vidDiv{
-    padding-bottom: 400px;
-    bottom: -300px;
+    padding-bottom: 50px;
+    bottom: -25px;
     position: absolute;
     background-color: white;
     /*ensures the transparent images dont overlap and that they fade out in the bottom*/
