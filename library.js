@@ -34,6 +34,15 @@ $(document).ready(function() {
     
 //Main Functionality
     setSizes();
+    /*
+    if (!localStorage.getItem('playlists')) {
+        localStorage.setItem('playlists', JSON.stingify(playlists));
+    }
+    else {
+        playlists = JSON.parse(sessionStorage.getItem("playlists"));
+    }
+    */
+    
     var songs = JSON.parse(sessionStorage.getItem("library"));
     if (!songs) {
         alert("Error! Bad Session Storage");
@@ -93,7 +102,6 @@ $(document).ready(function() {
         var name = $(this).children(':nth-child(1)').text();
         var artist = $(this).children(':nth-child(3)').text();
         $("#addBox").css('left', e.pageX-216).css('top', e.pageY-40).show();
-        $(this).addClass('selected');
         currentSong.name=name;
         currentSong.artist=artist;
         currentTR = $(this);

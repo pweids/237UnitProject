@@ -25,7 +25,7 @@ $(document).ready(function() {
         
     $('#fileInput').on('change', function(e) {
         var file = this.files[0];
-        if (file !== null){
+        if (file !== null && file.type === 'text/xml'){
             var fr = new FileReader();
             fr.onloadend = function(evt) {
                   if (evt.target.readyState == FileReader.DONE) {
