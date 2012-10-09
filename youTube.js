@@ -90,7 +90,7 @@ function playVideo(){
         $('#player').each(function() {
         swfobject.embedSWF(
           playerUrl + '&rel=1&border=0&fs=1&autoplay=' + 
-          (autoplay?1:0)+ "?enablejsapi=1", 'player', '290', '250', '9.0.0', false, 
+          (autoplay?1:0)+ "?enablejsapi=1", 'player', '290', '240', '9.0.0', false, 
           false, {allowfullscreen: 'true'}, {id: 'player'});
         //add css to object
         swfobject.createCSS("#player", "width:100%; height:90%;");            
