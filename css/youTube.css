@@ -30,12 +30,12 @@ body{
 
 .vidDiv{
     padding-bottom: 50px;
-    bottom: -25px;
+    bottom: -20px;
     position: absolute;
     background-color: white;
     /*ensures the transparent images dont overlap and that they fade out in the bottom*/
 }
-#ytPlayer{
+#player{
     position: absolute;
     z-index: 2;
 

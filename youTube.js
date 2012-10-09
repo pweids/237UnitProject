@@ -97,10 +97,10 @@ function playVideo(){
         swfobject.embedSWF(
           playerUrl + '&rel=1&border=0&fs=1&autoplay=' + 
           (autoplay?1:0)+ "?enablejsapi=1", 'player', '290', '250', '9.0.0', false, 
-          false, {allowfullscreen: 'true'});
+          false, {allowfullscreen: 'true'}, {id: 'player'});
         //add css to object
         $('#player').bind('onStateChange', 'playerState');
-        swfobject.createCSS("#player", "width:100%; height:50%;");            
+        swfobject.createCSS("#player", "width:100%; height:90%;");            
         });
  
     }
