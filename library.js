@@ -92,7 +92,7 @@ $(document).ready(function() {
     $(".songlist tr").click(function(e) {
         var name = $(this).children(':nth-child(1)').text();
         var artist = $(this).children(':nth-child(3)').text();
-        $("#addBox").css('left', e.pageX-216).css('top', e.pageY-10).show();
+        $("#addBox").css('left', e.pageX-216).css('top', e.pageY-40).show();
         $(this).addClass('selected');
         currentSong.name=name;
         currentSong.artist=artist;
@@ -109,5 +109,9 @@ $(document).ready(function() {
         selectedplist = $((':selected'), $(this)).text();
         currentTR.addClass('playlist-' + selectedplist);
         $(this).blur();
+    })
+    
+    $('#playit').click( function() {
+        alert("Jeff do it!");
     })
 });
