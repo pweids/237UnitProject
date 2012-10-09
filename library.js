@@ -1,5 +1,7 @@
 $(document).ready(function() {
-    
+    var currentSong = {name:null, artist:null};
+    var currentTR;
+    var playlists = [];
 //Helper Functions
 
     //This makes the top bar width flexible and more accurate
@@ -64,24 +66,26 @@ $(document).ready(function() {
     
     //When a playlist is selected
     
-    
     //when the library is selected
     $(".lib.listblock").click(function() {
         $('.plist ul').find('li').removeClass('selected');
         $(this).addClass('selected');
-        $('.songlist').css('color', 'black');
+        $('.songlist tr').show();
     });
     
     $('#addPlaylist').click(function() {
         var plistname = prompt("Insert name for new playlist");
         $('.plist.listblock ul').append('<li>'+plistname+'</li>');
-        $('#addBoxSelections').append('<option>' + plistname + '</option>');
+        $('#addBoxSelections').append($('<option></option>').text(plistname));
         $(".plist.listblock").toggle();
+        playlists.push(plistname);
         $(".plist li").click(function() {
             $(this).parent().find('li').removeClass('selected');
             $('.lib').removeClass('selected');
             $(this).addClass('selected');
-            $('.songlist').css('color', '#666');
+            $('.songlist tr').hide();
+            classname = '.playlist-' + $(this).text();
+            $(classname).show();
         });
     });
     
@@ -89,9 +93,21 @@ $(document).ready(function() {
         var name = $(this).children(':nth-child(1)').text();
         var artist = $(this).children(':nth-child(3)').text();
         $("#addBox").css('left', e.pageX-216).css('top', e.pageY-10).show();
+        $(this).addClass('selected');
+        currentSong.name=name;
+        currentSong.artist=artist;
+        currentTR = $(this);
     });
     
-    $("#addBoxSelectors").mouseleave( function() {
-        $(this).fadeOut();
+    $("#addBox").mouseleave( function() {
+        if (!$('#addBoxSelections').is(':focus'))
+            $(this).fadeOut()
+        $('.songlist .selected').removeClass('selected');
+    })
+    
+    $('#addBoxSelections').change(function() {
+        selectedplist = $((':selected'), $(this)).text();
+        currentTR.addClass('playlist-' + selectedplist);
+        $(this).blur();
     })
 });
