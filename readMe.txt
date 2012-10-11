@@ -1,10 +1,4 @@
-Jeff Mich (jmich)
-Paul Weidinger
-
 The purpose of this app is to make it convenient to watch YouTube videos based on your itunes library. One must export an xml file from itunes by File->Library->Exmport library. Once loaded one can double clisk on a song and a coverflow will appear that displays the most viewed videos matching that song and artist. Results will be displayed in descending order based on view count. Click outside of the youtube div to remove to current swf element. Navigation can then continue through the coverflow. Click on any song again to requery google. 
-
-Note:
-SWF does not embed in Firefox. Have not found workaround. 
 
 Required Elements [35 pts; 5 pts each]
 Your project must demonstrate clear and effective use of each of the following major concepts we have covered:
