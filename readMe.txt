@@ -10,8 +10,6 @@ Required Elements [35 pts; 5 pts each]
 Your project must demonstrate clear and effective use of each of the following major concepts we have covered:
 
 Javascript (including creating your own objects with inheritance)
-
---PAUL add inheritance for window screen
 -- used javascript for creating converflow effect
 --used javascript for uploading file, redirection, parsing and creating library, displaying library, creating playlists, dynamic display, etc. 
 

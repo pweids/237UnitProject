@@ -43,7 +43,8 @@ $(document).ready(function() {
 
     //Main Functionality
     setSizes();
-
+    
+    
     //Parse the JSON in sessionStorage and add to library
     var songs = JSON.parse(sessionStorage.getItem("library"));
     if (!songs) {
@@ -53,13 +54,8 @@ $(document).ready(function() {
             $('.songlist table').append('<tr><td>' + value.name + '</td><td>' + betterTime(value.time) + '</td><td>' + value.artist + '</td><td>' + value.album + '</td></tr>');
         });
     }
-<<<<<<< HEAD
     
     
-=======
-
-
->>>>>>> parent of d887ce6... load first song
 
     //Event Handlers
     $(window).resize(function() {
