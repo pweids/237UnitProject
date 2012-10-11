@@ -54,7 +54,18 @@ $(document).ready(function() {
             $('.songlist table').append('<tr><td>' + value.name + '</td><td>' + betterTime(value.time) + '</td><td>' + value.artist + '</td><td>' + value.album + '</td></tr>');
         });
     }
+
+    currentSong.name = $('.songlist tr:nth-child(1)').children(':nth-child(1)').text();
+    currentSong.artist = $('.songlist tr:nth-child(1)').children(':nth-child(3)').text();
     
+    console.log(currentSong.name);
+    
+    var search = currentSong.name + currentSong.artist;
+        if (window.videoPlaying) {
+            $('#player').remove();
+            window.videoPlaying = false
+        }
+    getSong(search);
     
 
     //Event Handlers
@@ -134,13 +145,4 @@ $(document).ready(function() {
             }
         getSong(searchString);
     })
-    
-    currentSong.name = $('.songlist tr:nth-child(1)').children(':nth-child(1)').text();
-    currentSong.artist = $('.songlist tr:nth-child(1)').children(':nth-child(3)').text();
-    var search = currentSong.name + currentSong.artist;
-        if (window.videoPlaying) {
-            $('#player').remove();
-            window.videoPlaying = false
-        }
-    getSong(search);
 });
