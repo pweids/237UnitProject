@@ -43,8 +43,7 @@ $(document).ready(function() {
 
     //Main Functionality
     setSizes();
-    
-    
+
     //Parse the JSON in sessionStorage and add to library
     var songs = JSON.parse(sessionStorage.getItem("library"));
     if (!songs) {
@@ -55,18 +54,7 @@ $(document).ready(function() {
         });
     }
 
-    currentSong.name = $('.songlist tr:nth-child(1)').children(':nth-child(1)').text();
-    currentSong.artist = $('.songlist tr:nth-child(1)').children(':nth-child(3)').text();
-    
-    console.log(currentSong.name);
-    
-    var search = currentSong.name + currentSong.artist;
-        if (window.videoPlaying) {
-            $('#player').remove();
-            window.videoPlaying = false
-        }
-    getSong(search);
-    
+
 
     //Event Handlers
     $(window).resize(function() {
