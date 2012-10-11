@@ -28,7 +28,6 @@ DOM manipulation
 AJAX and/or JSON-P client
 --retrieving information from google
 --We also asynchronously upload and parse files, create and add playlists, play songs, query youtube.
---Store song library as a JSON string for HTML5 localStorage.
 
 jQuery
 --used extensively throughout for dom manipulation, effects, etc.
@@ -37,16 +36,15 @@ Robust App [20 pts]
 Your web app should work.  It should load and run with no exceptions, and clearly perform some easily-understood task, and it should perform it properly under normal usage.  It also should not crash or hang or otherwise enter some error state, even in the face of undesired input.
 -- Coverflow works best in Web-kit browsers and relatively well in mozilla
 - adds data from local storage
---verifies file is of type text/XML
   
 User Interface Design [20 pts]
 You should have a reasonably polished user interface with a clean, pleasing visual design, and with intuitive controls and navigation.
--simple, minimalistic design
+-simple design
 -coverflow fun to use
   
 Effort [20 pts]
 Once again:  you are expected to invest at least 10-15 hours into this project, and it is further expected that your project will clearly reflect the quantity and quality of design and craftsmanship that goes along with that much time on this task.
--- 50+ hours between the two of us. Overusage of MDN, jQuery's API, and google.
+-- ~30 hours put in
  
 Code Design / Style [5 pts]
 Your project should be divided properly into HTML, CSS, and JS, with clear designs in each.  Your code should abide by all the style guidelines we have discussed in this course.
