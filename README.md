@@ -1,4 +1,5 @@
-<emp>This is our Unit Project for 237. Notes and implementation strategy will be here.</emp>
+<emp>This is our Unit Project for 237. Notes and implementation strategy are here.</emp>
+<emp>For usage, you will have to upload an XML file from your iTunes library. A sample XML file is provided as Library.xml</emp>
 
 <h1>Application Logic</h1>
 
@@ -84,10 +85,12 @@
 <h2>Work Division</h2>
 <h3>Paul</h3>
 <ul>
-    <li>Layout (HTML + CSS)</li>
+    <li>HTML and CSS</li>
+    <li>Library parsing, storage, and display</li>
+    <li>Ajax functionality</li>
 
 </ul>
 <h3>Jeff</h3>
 <ul>
-    <li>Work on parsing songs as a song object and into a library array</li>
+    <li>YouTube API</li>
 </ul>
